@@ -42,10 +42,8 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.15'
     kapt 'com.google.dagger:dagger-compiler:2.15'
 
-    //Jackson
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.7.2'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.7.2'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.7.2'
+    //Json deserializer
+    implementation 'com.squareup.moshi:moshi:1.5.0'
 
     //RxJava
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -54,7 +52,7 @@ dependencies {
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-jackson:2.0.1'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
 
     //OKHttp
     implementation 'com.squareup.okhttp:okhttp:2.6.0'
