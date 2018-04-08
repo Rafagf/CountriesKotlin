@@ -8,6 +8,8 @@ import io.reactivex.Single
  */
 interface CountryListMvp {
     interface View {
+        fun showError()
+        fun updateList(countries: List<CountryListViewModel>)
 
     }
 
