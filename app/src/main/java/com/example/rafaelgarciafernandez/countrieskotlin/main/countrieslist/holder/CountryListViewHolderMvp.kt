@@ -5,6 +5,12 @@ package com.example.rafaelgarciafernandez.countrieskotlin.main.countrieslist.hol
  */
 interface CountryListViewHolderMvp {
     interface View {
+        fun setName(name: String)
 
+        fun setContinent(continent: String)
+
+        fun setPopulation(population: String)
+
+        fun setFlag(url: String)
     }
 }

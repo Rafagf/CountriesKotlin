@@ -41,7 +41,6 @@ class CountryListPresenter(private val view: CountryListMvp.View,
                     override fun onError(e: Throwable) {
                         onFetchingCountriesFailed()
                     }
-
                 })
 
     }
@@ -56,5 +55,9 @@ class CountryListPresenter(private val view: CountryListMvp.View,
         countryList.clear()
         countryList.addAll(countriesViewModel)
         view.updateList(countriesViewModel)
+    }
+
+    fun retry() {
+        fetchCountries()
     }
 }
