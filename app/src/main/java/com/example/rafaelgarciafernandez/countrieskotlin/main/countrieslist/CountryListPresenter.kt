@@ -82,10 +82,10 @@ class CountryListPresenter(private val view: CountryListMvp.View,
     }
 
     fun onSearchViewShown() {
-        view.setStatusBarColor(R.color.plain_grey)
+        view.changeStatusBarColor(R.color.plain_grey)
     }
 
     fun onSearchViewClosed() {
-        view.setStatusBarColor(R.color.color_primary)
+        view.changeStatusBarColor(R.color.color_primary)
     }
 }

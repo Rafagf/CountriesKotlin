@@ -11,7 +11,7 @@ interface CountryListMvp {
     interface View {
         fun showError()
         fun updateList(countries: List<CountryListViewModel>)
-        fun setStatusBarColor(@ColorRes color: Int)
+        fun changeStatusBarColor(@ColorRes color: Int)
     }
 
     interface Interactor {

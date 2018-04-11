@@ -2,6 +2,7 @@ package com.example.rafaelgarciafernandez.countrieskotlin.repositories
 
 import android.content.SharedPreferences
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country
+import com.example.rafaelgarciafernandez.countrieskotlin.utils.edit
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -76,11 +77,15 @@ class CountriesLocalDataSource(private val sharedPreferences: SharedPreferences)
     }
 
     fun clear() {
-        sharedPreferences.edit().remove(COUNTRIES_JSON).apply()
+        sharedPreferences.edit {
+            remove(COUNTRIES_JSON)
+        }
     }
 
     private fun saveCountriesJsonInSharedPreferences(json: String) {
-        sharedPreferences.edit().putString(COUNTRIES_JSON, json).apply()
+        sharedPreferences.edit {
+            putString(COUNTRIES_JSON, json)
+        }
     }
 
     private fun getCountriesJsonFromSharedPreferences(): String? {

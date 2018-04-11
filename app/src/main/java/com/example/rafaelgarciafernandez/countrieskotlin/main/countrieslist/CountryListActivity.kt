@@ -1,8 +1,8 @@
 package com.example.rafaelgarciafernandez.countrieskotlin.main.countrieslist
 
 import android.os.Bundle
+import android.support.annotation.ColorRes
 import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -13,6 +13,7 @@ import com.example.rafaelgarciafernandez.countrieskotlin.MyApplication
 import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.di.components.DaggerCountryListViewComponent
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.CountryListViewModule
+import com.example.rafaelgarciafernandez.countrieskotlin.utils.setStatusBarColor
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -115,7 +116,7 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
         adapter.notifyDataSetChanged()
     }
 
-    override fun setStatusBarColor(color: Int) {
-        window.statusBarColor = ContextCompat.getColor(this, color)
+    override fun changeStatusBarColor(@ColorRes color: Int) {
+        setStatusBarColor(color)
     }
 }

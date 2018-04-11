@@ -17,10 +17,10 @@ import javax.inject.Inject
  */
 class CountryListViewHolder(val view: View) : RecyclerView.ViewHolder(view), CountryListViewHolderMvp.View {
 
-    val nameTextView: TextView = itemView.nameTextView
-    val continentTextView: TextView = itemView.continentTextView
-    val populationTextView: TextView = itemView.populationTextView
-    val flagImageView: ImageView = itemView.flagImageView
+    private val nameTextView: TextView = itemView.nameTextView
+    private val continentTextView: TextView = itemView.continentTextView
+    private val populationTextView: TextView = itemView.populationTextView
+    private val flagImageView: ImageView = itemView.flagImageView
 
     @Inject
     lateinit var presenter: CountryListViewHolderPresenter
