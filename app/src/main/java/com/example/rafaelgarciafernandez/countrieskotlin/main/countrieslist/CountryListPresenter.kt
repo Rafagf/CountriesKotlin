@@ -1,5 +1,6 @@
 package com.example.rafaelgarciafernandez.countrieskotlin.main.countrieslist
 
+import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -59,5 +60,32 @@ class CountryListPresenter(private val view: CountryListMvp.View,
 
     fun retry() {
         fetchCountries()
+    }
+
+    fun onQueryTextSubmit(query: String) {
+        search(query)
+    }
+
+    fun onQueryTextChange(newText: String) {
+        search(newText)
+    }
+
+    private fun search(query: String) {
+        val filteredCountries = ArrayList<CountryListViewModel>()
+        for (country in countryList) {
+            if (country.name.toLowerCase().startsWith(query.toLowerCase())) {
+                filteredCountries.add(country)
+            }
+        }
+
+        view.updateList(filteredCountries)
+    }
+
+    fun onSearchViewShown() {
+        view.setStatusBarColor(R.color.plain_grey)
+    }
+
+    fun onSearchViewClosed() {
+        view.setStatusBarColor(R.color.color_primary)
     }
 }

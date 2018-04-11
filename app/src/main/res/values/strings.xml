@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CountriesKotlin</string>
+    <string name="app_name">Countries</string>
     <string name="there_was_an_error">Oops! There was an error</string>
     <string name="retry">Retry</string>
     <string name="population">Population:\u0020 </string>

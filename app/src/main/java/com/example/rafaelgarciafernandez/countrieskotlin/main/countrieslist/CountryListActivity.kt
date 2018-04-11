@@ -2,15 +2,18 @@ package com.example.rafaelgarciafernandez.countrieskotlin.main.countrieslist
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import com.example.rafaelgarciafernandez.countrieskotlin.MyApplication
 import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.di.components.DaggerCountryListViewComponent
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.CountryListViewModule
+import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
@@ -29,13 +32,52 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
         init()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        val item = menu.findItem(R.id.action_search)
+        searchView.setMenuItem(item)
+        return true
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.stop()
     }
 
     private fun initViews() {
+        setToolbar()
+        setSearchView()
         setList()
+    }
+
+    private fun setToolbar() {
+        setSupportActionBar(toolbar)
+    }
+
+
+    private fun setSearchView() {
+        searchView.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                presenter.onQueryTextSubmit(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                presenter.onQueryTextChange(newText)
+                return false
+            }
+        })
+
+        searchView.setOnSearchViewListener(object : MaterialSearchView.SearchViewListener {
+            override fun onSearchViewShown() {
+                presenter.onSearchViewShown()
+            }
+
+            override fun onSearchViewClosed() {
+                presenter.onSearchViewClosed()
+            }
+        })
     }
 
     private fun setList() {
@@ -71,5 +113,9 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
         countryList.clear()
         countryList.addAll(countries)
         adapter.notifyDataSetChanged()
+    }
+
+    override fun setStatusBarColor(color: Int) {
+        window.statusBarColor = ContextCompat.getColor(this, color)
     }
 }

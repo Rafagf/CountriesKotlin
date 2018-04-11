@@ -4,6 +4,7 @@ import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.di.providers.FlagProvider
 import com.example.rafaelgarciafernandez.countrieskotlin.di.providers.ResourcesProvider
 import com.example.rafaelgarciafernandez.countrieskotlin.main.countrieslist.CountryListViewModel
+import com.example.rafaelgarciafernandez.countrieskotlin.utils.formatPopulation
 
 class CountryListViewHolderPresenter(private val view: CountryListViewHolderMvp.View, private val resourcesProvider: ResourcesProvider, private val flagProvider: FlagProvider) {
 
@@ -36,8 +37,7 @@ class CountryListViewHolderPresenter(private val view: CountryListViewHolderMvp.
         }
         else {
             view.setPopulation(resourcesProvider.getText(R.string.population) + country.population)
-//            view.setPopulation(resourcesProvider.getText(R.string.population) + FormattingUtils.formatPopulation(country.getPopulation()))
+            view.setPopulation(resourcesProvider.getText(R.string.population) + formatPopulation(country.population))
         }
     }
-
 }

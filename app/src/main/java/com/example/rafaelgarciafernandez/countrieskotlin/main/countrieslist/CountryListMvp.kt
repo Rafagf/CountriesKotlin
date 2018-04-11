@@ -1,5 +1,6 @@
 package com.example.rafaelgarciafernandez.countrieskotlin.main.countrieslist
 
+import android.support.annotation.ColorRes
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country
 import io.reactivex.Single
 
@@ -10,7 +11,7 @@ interface CountryListMvp {
     interface View {
         fun showError()
         fun updateList(countries: List<CountryListViewModel>)
-
+        fun setStatusBarColor(@ColorRes color: Int)
     }
 
     interface Interactor {
