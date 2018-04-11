@@ -22,7 +22,6 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
 
     @Inject
     lateinit var presenter: CountryListPresenter
-
     private var countryList: MutableList<CountryListViewModel> = mutableListOf()
     private lateinit var adapter: CountryListAdapter
 
@@ -40,7 +39,6 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
         return true
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         presenter.stop()
@@ -50,12 +48,12 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
         setToolbar()
         setSearchView()
         setList()
+        setScrollToTopButton()
     }
 
     private fun setToolbar() {
         setSupportActionBar(toolbar)
     }
-
 
     private fun setSearchView() {
         searchView.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
@@ -82,16 +80,21 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
     }
 
     private fun setList() {
-        countriesRecyclerView.layoutManager = LinearLayoutManager(this)
+        val linearLayoutManager = LinearLayoutManager(this)
+        countriesRecyclerView.layoutManager = linearLayoutManager
         adapter = CountryListAdapter(countryList) {
             Toast.makeText(applicationContext, it.name, Toast.LENGTH_LONG).show()
         }
         countriesRecyclerView.adapter = adapter
         countriesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-
+                presenter.onListScrolled(linearLayoutManager.findFirstVisibleItemPosition())
             }
         })
+    }
+
+    private fun setScrollToTopButton() {
+        scrollToTop.setOnClickListener { presenter.onScrollToTopClicked() }
     }
 
     private fun init() {
@@ -118,5 +121,21 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
 
     override fun changeStatusBarColor(@ColorRes color: Int) {
         setStatusBarColor(color)
+    }
+
+    override fun scrollToTop() {
+        countriesRecyclerView.scrollToPosition(0)
+    }
+
+    override fun setToolbarExpanded(expanded: Boolean) {
+        appBarLayout.setExpanded(expanded)
+    }
+
+    override fun setScrollToTopButtonVisibility(visible: Boolean) {
+        if (visible) {
+            scrollToTop.visibility = View.VISIBLE
+        } else {
+            scrollToTop.visibility = View.GONE
+        }
     }
 }

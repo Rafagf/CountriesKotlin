@@ -12,6 +12,9 @@ interface CountryListMvp {
         fun showError()
         fun updateList(countries: List<CountryListViewModel>)
         fun changeStatusBarColor(@ColorRes color: Int)
+        fun scrollToTop()
+        fun setToolbarExpanded(expanded: Boolean)
+        fun setScrollToTopButtonVisibility(visible: Boolean)
     }
 
     interface Interactor {

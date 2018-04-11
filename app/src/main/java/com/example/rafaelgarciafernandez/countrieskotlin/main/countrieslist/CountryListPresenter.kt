@@ -88,4 +88,13 @@ class CountryListPresenter(private val view: CountryListMvp.View,
     fun onSearchViewClosed() {
         view.changeStatusBarColor(R.color.color_primary)
     }
+
+    fun onScrollToTopClicked() {
+        view.scrollToTop()
+        view.setToolbarExpanded(true)
+    }
+
+    fun onListScrolled(firstVisibleItem: Int) {
+        view.setScrollToTopButtonVisibility(firstVisibleItem > 0)
+    }
 }
