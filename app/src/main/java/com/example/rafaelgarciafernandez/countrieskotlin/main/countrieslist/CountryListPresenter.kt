@@ -97,4 +97,8 @@ class CountryListPresenter(private val view: CountryListMvp.View,
     fun onListScrolled(firstVisibleItem: Int) {
         view.setScrollToTopButtonVisibility(firstVisibleItem > 0)
     }
+
+    fun onCountrySelected(country: CountryListViewModel) {
+        view.goToCountryDetailedView(country)
+    }
 }

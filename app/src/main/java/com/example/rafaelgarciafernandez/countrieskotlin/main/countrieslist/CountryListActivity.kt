@@ -14,6 +14,7 @@ import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.di.components.DaggerCountryListViewComponent
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.CountryListViewModule
 import com.example.rafaelgarciafernandez.countrieskotlin.utils.setStatusBarColor
+import com.example.rafaelgarciafernandez.countrieskotlin.utils.toast
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -83,7 +84,7 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
         val linearLayoutManager = LinearLayoutManager(this)
         countriesRecyclerView.layoutManager = linearLayoutManager
         adapter = CountryListAdapter(countryList) {
-            Toast.makeText(applicationContext, it.name, Toast.LENGTH_LONG).show()
+            presenter.onCountrySelected(it)
         }
         countriesRecyclerView.adapter = adapter
         countriesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -137,5 +138,10 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
         } else {
             scrollToTop.visibility = View.GONE
         }
+    }
+
+    override fun goToCountryDetailedView(country: CountryListViewModel) {
+        //todo take to detailed view
+        toast("Implement this fucker")
     }
 }

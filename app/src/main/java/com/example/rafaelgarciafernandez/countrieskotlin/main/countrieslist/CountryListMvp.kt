@@ -15,6 +15,7 @@ interface CountryListMvp {
         fun scrollToTop()
         fun setToolbarExpanded(expanded: Boolean)
         fun setScrollToTopButtonVisibility(visible: Boolean)
+        fun goToCountryDetailedView(country: CountryListViewModel)
     }
 
     interface Interactor {
