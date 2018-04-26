@@ -99,7 +99,7 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
     }
 
     private fun init() {
-        val applicationComponent = (application as MyApplication).getApplicationComponent()
+        val applicationComponent = (application as MyApplication).applicationComponent
         DaggerCountryListViewComponent.builder()
                 .applicationComponent(applicationComponent)
                 .countryListViewModule(CountryListViewModule(this))

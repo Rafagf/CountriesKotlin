@@ -26,7 +26,7 @@ class CountryListViewHolder(val view: View) : RecyclerView.ViewHolder(view), Cou
     lateinit var presenter: CountryListViewHolderPresenter
 
     init {
-        val applicationComponent = (itemView.context.applicationContext as MyApplication).getApplicationComponent()
+        val applicationComponent = (itemView.context.applicationContext as MyApplication).applicationComponent
         DaggerCountryListViewHolderComponent.builder()
                 .applicationComponent(applicationComponent)
                 .countryListViewHolderModule(CountryListViewHolderModule(this))

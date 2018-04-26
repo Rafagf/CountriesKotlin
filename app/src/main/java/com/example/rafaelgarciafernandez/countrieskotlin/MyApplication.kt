@@ -9,13 +9,13 @@ import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.NetworkModul
 /**
  * Created by Rafa on 05/04/2018.
  */
-class MyApplication : Application() {
+open class MyApplication : Application() {
 
     companion object {
-        private val COUNTRIES_BASE_URL = "https://restcountries.eu/rest/v1/"
+        private const val COUNTRIES_BASE_URL = "https://restcountries.eu/rest/v1/"
     }
 
-    private lateinit var applicationComponent: ApplicationComponent
+    lateinit var applicationComponent: ApplicationComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -27,9 +27,5 @@ class MyApplication : Application() {
                 .applicationModule(ApplicationModule(this))
                 .networkModule(NetworkModule(COUNTRIES_BASE_URL))
                 .build()
-    }
-
-    fun getApplicationComponent(): ApplicationComponent {
-        return applicationComponent
     }
 }
