@@ -7,5 +7,5 @@ import com.squareup.moshi.Json
  */
 data class Country(val name: String, val nativeName: String, val alpha2Code: String,
                    val alpha3Code: String, val capital: String?, val population: String? = null,
-                   val area: String?, val demonym: String?, val latLng: List<Double>,
+                   val area: Float?, val demonym: String?, val latLng: List<Double>,
                    @field:Json(name = "region") val continent: String?, @field:Json(name = "subregion") val region: String?, @field:Json(name = "borders") val borderCountryAlphaList: List<String> = listOf())

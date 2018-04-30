@@ -4,14 +4,15 @@ import com.example.rafaelgarciafernandez.countrieskotlin.model.Country
 import com.example.rafaelgarciafernandez.countrieskotlin.repositories.CountriesLocalDataSource
 import com.example.rafaelgarciafernandez.countrieskotlin.repositories.CountriesMemoryDataSource
 import com.example.rafaelgarciafernandez.countrieskotlin.repositories.CountriesRemoteDataSource
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
 import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
-import junit.framework.Assert.assertEquals
+import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
 
 /**
  * Created by Rafa on 26/04/2018.
@@ -25,16 +26,18 @@ class CountryListInteractorTest {
 
     @Before
     fun setUp() {
-        memoryDataSource = mock(CountriesMemoryDataSource::class.java)
-        localDataSource = mock(CountriesLocalDataSource::class.java)
-        remoteDataSource = mock(CountriesRemoteDataSource::class.java)
+        memoryDataSource = mock()
+        localDataSource = mock()
+        remoteDataSource = mock()
         interactor = CountryListInteractor(localDataSource, memoryDataSource, remoteDataSource)
     }
 
     @Test
     fun given_memory_data_source_has_data_when_getting_countries_then_return_memory_data_countries() {
-        val country = mock(Country::class.java)
-        `when`(country.name).thenReturn("Spain")
+        val country = mock<Country> {
+            on { name } doReturn "Spain"
+        }
+
         val countries = listOf(country)
         val testObserver = TestObserver<List<Country>>()
         `when`(memoryDataSource.getCountries()).thenReturn(Maybe.just(countries))
@@ -52,8 +55,11 @@ class CountryListInteractorTest {
 
     @Test
     fun given_local_data_source_has_data_and_memory_has_no_data_when_getting_countries_then_return_local_data_countries() {
-        val country = mock(Country::class.java)
-        `when`(country.name).thenReturn("Spain")
+        val country = mock<Country> {
+            on { name } doReturn "Spain"
+            on { alpha2Code } doReturn "ES"
+        }
+
         val countries = listOf(country)
         val testObserver = TestObserver<List<Country>>()
         `when`(memoryDataSource.getCountries()).thenReturn(Maybe.empty())
@@ -71,7 +77,10 @@ class CountryListInteractorTest {
 
     @Test
     fun given_remote_data_source_has_data_and_memory_and_local_have_no_data_when_getting_countries_then_return_remote_data_countries() {
-        val country = mock(Country::class.java)
+        val country = mock<Country> {
+            on { name } doReturn "Spain"
+        }
+
         `when`(country.name).thenReturn("Spain")
         val countries = listOf(country)
         val testObserver = TestObserver<List<Country>>()

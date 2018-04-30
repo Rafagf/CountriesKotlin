@@ -36,7 +36,6 @@ class CountryListViewHolderPresenter(private val view: CountryListViewHolderMvp.
             view.setPopulation(resourcesProvider.getText(R.string.population) + "-")
         }
         else {
-            view.setPopulation(resourcesProvider.getText(R.string.population) + country.population)
             view.setPopulation(resourcesProvider.getText(R.string.population) + country.population.toLong().toPopulationFormat())
         }
     }

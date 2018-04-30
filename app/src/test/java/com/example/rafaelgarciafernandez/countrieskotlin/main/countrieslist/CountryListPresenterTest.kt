@@ -1,21 +1,26 @@
 package com.example.rafaelgarciafernandez.countrieskotlin.main.countrieslist
 
 import com.example.rafaelgarciafernandez.countrieskotlin.R
+import com.example.rafaelgarciafernandez.countrieskotlin.RxImmediateSchedulerRule
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import io.reactivex.Single
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
 
 /**
  * Created by Rafa on 26/04/2018.
  */
 class CountryListPresenterTest {
 
-    //todo fix this
-//    @ClassRule
-//    val schedulers = RxImmediateSchedulerRule()
+    @get:Rule
+    val schedulers = RxImmediateSchedulerRule()
 
     private lateinit var view: CountryListMvp.View
     private lateinit var interactor: CountryListMvp.Interactor
@@ -23,8 +28,8 @@ class CountryListPresenterTest {
 
     @Before
     fun setUp() {
-        view = mock(CountryListMvp.View::class.java)
-        interactor = mock(CountryListMvp.Interactor::class.java)
+        view = mock()
+        interactor = mock()
         presenter = CountryListPresenter(view, interactor)
     }
 
@@ -40,7 +45,17 @@ class CountryListPresenterTest {
 
     @Test
     fun given_countries_successfully_fetched_when_started_then_it_updates_list() {
-        val countries: List<Country> = listOf(mock(Country::class.java), mock(Country::class.java))
+        val country1 = mock<Country> {
+            on { name } doReturn "Spain"
+            on { alpha2Code } doReturn "ES"
+        }
+
+        val country2 = mock<Country>() {
+            on { name } doReturn "England"
+            on { alpha2Code } doReturn "EN"
+        }
+
+        val countries = listOf(country1, country2)
         `when`(interactor.getCountries()).thenReturn(Single.just(countries))
 
         presenter.init()
@@ -57,6 +72,7 @@ class CountryListPresenterTest {
         presenter.init()
 
         verify(interactor).getCountries()
+        verify(view).showError()
         verifyNoMoreInteractions(view, interactor)
     }
 
@@ -66,7 +82,7 @@ class CountryListPresenterTest {
 
         presenter.retry()
 
-        verify(interactor.getCountries())
+        verify(interactor).getCountries()
         verifyNoMoreInteractions(view, interactor)
     }
 
@@ -129,7 +145,7 @@ class CountryListPresenterTest {
 
     @Test
     fun when_country_is_selected_then_open_detailed_view() {
-        val country = mock(CountryListViewModel::class.java)
+        val country = mock<CountryListViewModel>()
 
         presenter.onCountrySelected(country)
 

@@ -1,10 +1,10 @@
 package com.example.rafaelgarciafernandez.countrieskotlin.main.countrieslist
 
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country
-import junit.framework.Assert.assertEquals
+import com.nhaarman.mockitokotlin2.mock
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
 import java.util.*
 
 /**
@@ -27,7 +27,7 @@ class CountryListViewModelMapperTest {
     }
 
     private fun getMockedCountry(): Country {
-        val country = mock(Country::class.java)
+        val country: Country = mock()
         `when`(country.name).thenReturn("Spain")
         `when`(country.alpha2Code).thenReturn("ES")
         `when`(country.alpha3Code).thenReturn("ESP")
@@ -39,7 +39,7 @@ class CountryListViewModelMapperTest {
         latLng.add(-4.0)
         `when`(country.latLng).thenReturn(latLng)
         `when`(country.demonym).thenReturn("Spanish")
-        `when`(country.area).thenReturn("505992.0")
+        `when`(country.area).thenReturn(505992.0f)
         `when`(country.population).thenReturn("46439864")
         `when`(country.nativeName).thenReturn("España")
         val borders = ArrayList<String>()

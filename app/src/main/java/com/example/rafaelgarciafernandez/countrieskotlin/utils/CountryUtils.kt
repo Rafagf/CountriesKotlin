@@ -24,10 +24,10 @@ fun Long.toPopulationFormat(): String {
 }
 
 private val areaFormat = DecimalFormat("#.#").apply {
-    roundingMode = RoundingMode.CEILING
+    roundingMode = RoundingMode.DOWN
 }
 
-fun Float.toMeters() = "${areaFormat.format(this)} m²"
+fun Float.toMeters() = "$this m²"
 fun Float.toKiloMeters() = "${areaFormat.format(this / 1_000f)} km²"
 fun Float.toMegaMeters() = "${areaFormat.format(this / 1_000_000f)}M km²"
 
