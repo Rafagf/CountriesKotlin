@@ -10,7 +10,7 @@ import io.appflate.restmock.RESTMockServer
  */
 class TestApplication : MyApplication() {
 
-    fun createApplicationComponent() {
+    override fun createApplicationComponent() {
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
                 .networkModule(NetworkModule(RESTMockServer.getUrl()))

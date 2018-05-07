@@ -1,9 +1,12 @@
-package com.example.rafaelgarciafernandez.countrieskotlin.main
+package com.example.rafaelgarciafernandez.countrieskotlin
 
 import android.app.Application
 import android.content.Context
-import com.example.rafaelgarciafernandez.countrieskotlin.TestApplication
+import io.appflate.restmock.RESTMockServerStarter
+import io.appflate.restmock.android.AndroidAssetsFileParser
+import io.appflate.restmock.android.AndroidLogger
 import io.appflate.restmock.android.RESTMockTestRunner
+
 
 /**
  * Created by Rafa on 26/04/2018.

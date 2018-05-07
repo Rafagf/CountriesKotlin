@@ -142,6 +142,5 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
 
     override fun goToCountryDetailedView(country: CountryListViewModel) {
         //todo take to detailed view
-        toast("Implement this fucker")
     }
 }

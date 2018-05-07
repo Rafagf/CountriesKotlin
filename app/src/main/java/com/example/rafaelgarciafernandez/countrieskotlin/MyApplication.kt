@@ -22,7 +22,7 @@ open class MyApplication : Application() {
         createApplicationComponent()
     }
 
-    private fun createApplicationComponent() {
+    open fun createApplicationComponent() {
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(ApplicationModule(this))
                 .networkModule(NetworkModule(COUNTRIES_BASE_URL))

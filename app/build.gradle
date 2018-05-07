@@ -14,7 +14,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "com.example.rafaelgarciafernandez.countrieskotlin.main.CustomTestRunner"
+        testInstrumentationRunner "com.example.rafaelgarciafernandez.countrieskotlin.CustomTestRunner"
     }
 
     testOptions {
