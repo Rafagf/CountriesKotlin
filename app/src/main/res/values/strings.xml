@@ -4,4 +4,8 @@
     <string name="retry">Retry</string>
     <string name="population">Population:\u0020 </string>
     <string name="continent">Continent:\u0020 </string>
+    <string name="area">Area:\u0020</string>
+    <string name="demonym">Demonym:\u0020</string>
+    <string name="native_name">Native name:\u0020</string>
+    <string name="border_countries">Border countries</string>
 </resources>
