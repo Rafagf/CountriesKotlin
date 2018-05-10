@@ -113,7 +113,11 @@ class DetailedCountryPresenter(private val view: DetailedCountryMvp.View, privat
     }
 
     private fun setArea() {
-        view.setArea(resourcesProvider.getText(R.string.area) + countryViewModel.area.toAreaFormat())
+        if (countryViewModel.area.isNullOrEmpty()) {
+            view.setArea(resourcesProvider.getText(R.string.area) + "0 m²")
+        } else {
+            view.setArea(resourcesProvider.getText(R.string.area) + countryViewModel.area!!.toFloat().toAreaFormat())
+        }
     }
 
     private fun setDemonym() {

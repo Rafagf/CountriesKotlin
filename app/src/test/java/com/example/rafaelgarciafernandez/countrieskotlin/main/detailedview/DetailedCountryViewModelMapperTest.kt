@@ -22,12 +22,12 @@ class DetailedCountryViewModelMapperTest {
         assertEquals(viewModel.capital, "Madrid")
         assertEquals(viewModel.continent, "Europe")
         assertEquals(viewModel.region, "Southern Europe")
-        assertEquals(viewModel.area, 505992.0f)
+        assertEquals(viewModel.area, "505992.0")
         assertEquals(viewModel.population, "46439864")
         assertEquals(viewModel.demonym, "Spanish")
         assertEquals(viewModel.nativeName, "España")
-        assertEquals(viewModel.latLng.latitude, 40.0)
-        assertEquals(viewModel.latLng.longitude, -4.0)
+        assertEquals(viewModel.latLng.latitude, 40.0, 0.0)
+        assertEquals(viewModel.latLng.longitude, -4.0, 0.0)
         assertThat(viewModel.borderCountryAlphaList, contains<String>("AND", "FRA", "GIB", "PRT", "MAR"))
     }
 
@@ -41,7 +41,7 @@ class DetailedCountryViewModelMapperTest {
             on { region } doReturn "Southern Europe"
             on { latLng } doReturn listOf(40.0, -4.0)
             on { demonym } doReturn "Spanish"
-            on { area } doReturn 505992.0f
+            on { area } doReturn "505992.0"
             on { population } doReturn "46439864"
             on { nativeName } doReturn "España"
             on { borderCountryAlphaList } doReturn listOf("AND", "FRA", "GIB", "PRT", "MAR")

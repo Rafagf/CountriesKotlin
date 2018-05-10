@@ -31,9 +31,9 @@ fun Float.toMeters() = "$this m²"
 fun Float.toKiloMeters() = "${areaFormat.format(this / 1_000f)} km²"
 fun Float.toMegaMeters() = "${areaFormat.format(this / 1_000_000f)}M km²"
 
-fun Float?.toAreaFormat(): String {
+fun Float.toAreaFormat(): String {
     return when {
-        this == null || this <= 0f -> "0 m²"
+        this <= 0f -> "0 m²"
         this < 1000f -> toMeters()
         this < 1_000_000 -> toKiloMeters()
         else -> toMegaMeters()

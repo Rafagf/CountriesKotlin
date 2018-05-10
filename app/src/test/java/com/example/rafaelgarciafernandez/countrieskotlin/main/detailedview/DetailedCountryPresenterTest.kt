@@ -11,7 +11,6 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import io.reactivex.Single
-import net.bytebuddy.implementation.bytecode.Throw
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -286,7 +285,7 @@ class DetailedCountryPresenterTest {
             on { region } doReturn "Southern Europe"
             on { latLng } doReturn listOf(40.0, -4.0)
             on { demonym } doReturn "Spanish"
-            on { area } doReturn 505992.0f
+            on { area } doReturn "505992.0"
             on { population } doReturn "46439864"
             on { nativeName } doReturn "España"
             on { borderCountryAlphaList } doReturn listOf("AND", "FRA", "GIB", "PRT", "MAR")

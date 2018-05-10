@@ -39,7 +39,7 @@ class CountryListViewModelMapperTest {
         latLng.add(-4.0)
         `when`(country.latLng).thenReturn(latLng)
         `when`(country.demonym).thenReturn("Spanish")
-        `when`(country.area).thenReturn(505992.0f)
+        `when`(country.area).thenReturn("505992.0")
         `when`(country.population).thenReturn("46439864")
         `when`(country.nativeName).thenReturn("España")
         val borders = ArrayList<String>()
