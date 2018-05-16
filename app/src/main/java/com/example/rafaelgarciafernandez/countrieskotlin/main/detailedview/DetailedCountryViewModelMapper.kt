@@ -15,10 +15,7 @@ class DetailedCountryViewModelMapper {
 
     fun mapFrom(countryList: List<Country>): List<DetailedCountryViewModel> {
         val countryViewModelList = mutableListOf<DetailedCountryViewModel>()
-        for (country in countryList) {
-            countryViewModelList.add(mapFrom(country))
-        }
-
+        countryList.forEach { countryViewModelList.add(mapFrom(it)) }
         return countryViewModelList
     }
 }

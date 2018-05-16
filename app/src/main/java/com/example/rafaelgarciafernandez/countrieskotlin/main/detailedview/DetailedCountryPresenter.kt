@@ -78,61 +78,66 @@ class DetailedCountryPresenter(private val view: DetailedCountryMvp.View, privat
         view.setFlag(flagProvider.getFlagUrl(countryViewModel.alpha2))
     }
 
-    //todo look for way to get rid of those nasty !!
-
     private fun setCapital() {
-        if (countryViewModel.capital.isNullOrEmpty()) {
+        val capital: String? = countryViewModel.capital
+        if (capital == null || capital.isEmpty()) {
             view.setCapital("-")
         } else {
-            view.setCapital(countryViewModel.capital!!)
+            view.setCapital(capital)
         }
     }
 
     private fun setContinent() {
-        if (countryViewModel.continent.isNullOrEmpty()) {
+        val continent: String? = countryViewModel.continent
+        if (continent == null || continent.isEmpty()) {
             view.setContinent("-")
         } else {
-            view.setContinent(countryViewModel.continent!!)
+            view.setContinent(continent)
         }
     }
 
     private fun setRegion() {
-        if (countryViewModel.region.isNullOrEmpty()) {
+        val region: String? = countryViewModel.region
+        if (region == null || region.isEmpty()) {
             view.setRegion("-")
         } else {
-            view.setRegion(countryViewModel.region!!)
+            view.setRegion(region)
         }
     }
 
     private fun setPopulation() {
-        if (countryViewModel.population.isNullOrEmpty()) {
+        val population: String? = countryViewModel.population
+        if (population == null || population.isEmpty()) {
             view.setPopulation(resourcesProvider.getText(R.string.population) + "0")
         } else {
-            view.setPopulation(resourcesProvider.getText(R.string.population) + countryViewModel.population!!.toLong().toPopulationFormat())
+            view.setPopulation(resourcesProvider.getText(R.string.population) + population.toLong().toPopulationFormat())
         }
     }
 
     private fun setArea() {
-        if (countryViewModel.area.isNullOrEmpty()) {
+        val area: String? = countryViewModel.area
+        if (area == null || area.isEmpty()) {
             view.setArea(resourcesProvider.getText(R.string.area) + "0 m²")
         } else {
-            view.setArea(resourcesProvider.getText(R.string.area) + countryViewModel.area!!.toFloat().toAreaFormat())
+            view.setArea(resourcesProvider.getText(R.string.area) + area.toFloat().toAreaFormat())
         }
     }
 
     private fun setDemonym() {
-        if (countryViewModel.demonym.isNullOrEmpty()) {
+        val demonym: String? = countryViewModel.demonym
+        if (demonym == null || demonym.isEmpty()) {
             view.setDemonym(resourcesProvider.getText(R.string.demonym) + "-")
         } else {
-            view.setDemonym(resourcesProvider.getText(R.string.demonym) + countryViewModel.demonym!!)
+            view.setDemonym(resourcesProvider.getText(R.string.demonym) + demonym)
         }
     }
 
     private fun setNativeName() {
-        if (countryViewModel.nativeName.isNullOrEmpty()) {
+        val nativeName: String? = countryViewModel.nativeName
+        if (nativeName == null || nativeName.isEmpty()) {
             view.setNativeName(resourcesProvider.getText(R.string.native_name) + "-")
         } else {
-            view.setNativeName(resourcesProvider.getText(R.string.native_name) + countryViewModel.nativeName!!)
+            view.setNativeName(resourcesProvider.getText(R.string.native_name) + nativeName)
         }
     }
 

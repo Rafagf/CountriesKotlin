@@ -8,13 +8,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.View
-import android.widget.Toast
 import com.example.rafaelgarciafernandez.countrieskotlin.MyApplication
 import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.di.components.DaggerCountryListViewComponent
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.CountryListViewModule
 import com.example.rafaelgarciafernandez.countrieskotlin.utils.setStatusBarColor
-import com.example.rafaelgarciafernandez.countrieskotlin.utils.toast
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
