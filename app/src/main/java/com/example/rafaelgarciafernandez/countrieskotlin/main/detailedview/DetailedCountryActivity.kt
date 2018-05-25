@@ -2,7 +2,10 @@ package com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.example.rafaelgarciafernandez.countrieskotlin.MyApplication
 import com.example.rafaelgarciafernandez.countrieskotlin.R
+import com.example.rafaelgarciafernandez.countrieskotlin.di.components.DaggerDetailedCountryViewComponent
+import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.DetailedCountryViewModule
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
@@ -73,7 +76,12 @@ class DetailedCountryActivity : AppCompatActivity(), DetailedCountryMvp.View {
 
 
     private fun init(country: String) {
-        //todo inject presenter
+        val applicationComponent = (application as MyApplication).applicationComponent
+        DaggerDetailedCountryViewComponent.builder()
+                .applicationComponent(applicationComponent)
+                .detailedCountryViewModule(DetailedCountryViewModule(this))
+                .build()
+                .inject(this)
         presenter.init(country)
     }
 

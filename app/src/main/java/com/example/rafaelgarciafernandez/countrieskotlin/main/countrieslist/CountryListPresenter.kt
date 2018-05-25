@@ -15,7 +15,7 @@ import java.util.*
 class CountryListPresenter(private val view: CountryListMvp.View,
                            private val interactor: CountryListMvp.Interactor) {
 
-    private val countryList = ArrayList<CountryListViewModel>()
+    private var countryList = emptyList<CountryListViewModel>()
     private val compositeDisposable = CompositeDisposable()
 
     fun init() {
@@ -53,7 +53,7 @@ class CountryListPresenter(private val view: CountryListMvp.View,
     private fun onFetchingCountriesSucceed(countries: List<Country>) {
         val mapper = CountryListViewModelMapper()
         val countriesViewModel = mapper.mapFrom(countries)
-        countryList.addAll(countriesViewModel)
+        countryList = countriesViewModel
         view.updateList(countriesViewModel)
     }
 
