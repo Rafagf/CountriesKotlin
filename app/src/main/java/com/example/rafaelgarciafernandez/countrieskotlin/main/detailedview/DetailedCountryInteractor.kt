@@ -21,19 +21,17 @@ class DetailedCountryInteractor(private val localDataSource: CountriesLocalDataS
     }
 
     override fun getBorderCountriesName(alphaCountryList: List<String>): Single<List<String>> {
-        Observable.fromIterable(alphaCountryList)
-                .flatMap { country ->
-                    val memorySource = memoryDataSource.getCountryByName(country)
-                    val localSource = localDataSource.getCountryByName(country)
-                    val remoteSource = remoteDataSource.getCountryByName(country)
+        return Observable.fromIterable(alphaCountryList)
+                .flatMap { countryAlpha ->
+                    val memorySource = memoryDataSource.getCountryByAlpha3(countryAlpha)
+                    val localSource = localDataSource.getCountryByAlpha3(countryAlpha)
+                    val remoteSource = remoteDataSource.getCountryByAlpha3(countryAlpha)
 
                     Maybe.concat(memorySource, localSource, remoteSource.toMaybe())
                             .firstElement()
                             .toObservable()
-                            .flatMap { Observable.just(it) }
+                            .flatMap { Observable.just(it.name) }
                 }
                 .toList()
-
-        return Single.never()
     }
 }

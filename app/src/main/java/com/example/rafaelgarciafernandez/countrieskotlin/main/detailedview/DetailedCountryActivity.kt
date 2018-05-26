@@ -13,7 +13,7 @@ import javax.inject.Inject
 class DetailedCountryActivity : AppCompatActivity(), DetailedCountryMvp.View {
 
     companion object {
-        val COUNTRY_NAME_TAG = "country_name"
+        const val COUNTRY_NAME_TAG = "country_name"
     }
 
     @Inject
