@@ -10,15 +10,16 @@ import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.di.components.DaggerBorderViewComponent
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.BorderViewModule
 import com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview.DetailedCountryActivity
+import kotlinx.android.synthetic.main.borders_view.view.*
 import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
 /**
  * Created by Rafa on 25/05/2018.
  */
-class BorderView @JvmOverloads constructor(
+class BordersView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr),
-        BorderMvp.View {
+        BordersMvp.View {
 
     @Inject
     lateinit var presenter: BorderPresenter
@@ -48,13 +49,13 @@ class BorderView @JvmOverloads constructor(
     }
 
     override fun setBorderTitleVisibility(visible: Boolean) {
-//        borderTextView.setVisibility(if (visible) View.VISIBLE else View.GONE)
+        bordersTextView.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     override fun addBorder(countryName: String) {
         val border = View.inflate(context, R.layout.border_view, null) as TextView
         border.text = countryName
-//        bordersLinearLayout.addView(border)
+        bordersLinearLayout.addView(border)
         border.setOnClickListener { presenter.onCountryClicked(countryName) }
     }
 

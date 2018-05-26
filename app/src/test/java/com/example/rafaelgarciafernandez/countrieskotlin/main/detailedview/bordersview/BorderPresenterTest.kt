@@ -10,7 +10,7 @@ import org.junit.Test
  */
 class BorderPresenterTest {
 
-    private val view: BorderMvp.View = mock()
+    private val view: BordersMvp.View = mock()
     private val presenter: BorderPresenter = BorderPresenter(view)
 
     @Test

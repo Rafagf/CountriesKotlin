@@ -1,9 +1,131 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailed_view_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.detailedview.DetailedCountryActivity">
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_primary"
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        app:theme="@style/CountriesToolBar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/flagImageView"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/capitalTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text="Madrid" />
+
+                    <TextView
+                        android:id="@+id/continentTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:paddingTop="10dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        tools:text="Eurooe" />
+
+                    <TextView
+                        android:id="@+id/regionTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        tools:text="Southern Europe" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <TextView
+                android:id="@+id/populationTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/plain_black"
+                android:textSize="16sp"
+                tools:text="Population: "/>
+
+            <TextView
+                android:id="@+id/areaTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/plain_black"
+                android:textSize="16sp"
+                tools:text="Area: "/>
+
+            <TextView
+                android:id="@+id/demonymTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/plain_black"
+                android:textSize="16sp"
+                tools:text="Demonym: "/>
+
+            <TextView
+                android:id="@+id/nativeNameTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/plain_black"
+                tools:text="Native name:"
+                android:textSize="16sp" />
+
+            <com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview.bordersview.BordersView
+                android:id="@+id/bordersView"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

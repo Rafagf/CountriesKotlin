@@ -3,7 +3,7 @@ package com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview.bord
 /**
  * Created by Rafa on 25/05/2018.
  */
-class BorderPresenter(val view: BorderMvp.View) {
+class BorderPresenter(val view: BordersMvp.View) {
 
     fun bind(countries: List<String>) {
         if (countries.isNotEmpty()) {

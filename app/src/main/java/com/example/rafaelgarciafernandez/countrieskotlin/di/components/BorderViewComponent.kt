@@ -2,7 +2,7 @@ package com.example.rafaelgarciafernandez.countrieskotlin.di.components
 
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.BorderViewModule
 import com.example.rafaelgarciafernandez.countrieskotlin.di.scopes.PerCustomView
-import com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview.bordersview.BorderView
+import com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview.bordersview.BordersView
 import dagger.Component
 
 /**
@@ -11,8 +11,8 @@ import dagger.Component
 @PerCustomView
 @Component(
         modules = arrayOf(BorderViewModule::class)
-        )
+)
 
 interface BorderViewComponent {
-    fun inject(view: BorderView)
+    fun inject(view: BordersView)
 }
