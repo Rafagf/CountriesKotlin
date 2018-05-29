@@ -6,18 +6,18 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.example.rafaelgarciafernandez.countrieskotlin.MyApplication
 import com.example.rafaelgarciafernandez.countrieskotlin.R
+import com.example.rafaelgarciafernandez.countrieskotlin.R.id.*
 import com.example.rafaelgarciafernandez.countrieskotlin.di.components.DaggerDetailedCountryViewComponent
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.DetailedCountryViewModule
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detailed_country.*
 import javax.inject.Inject
 
-class DetailedCountryActivity : AppCompatActivity(), DetailedCountryMvp.View, OnMapReadyCallback {
+class DetailedCountryActivity : AppCompatActivity(), DetailedCountryMvp.View {
 
     companion object {
         const val COUNTRY_NAME_TAG = "country_name"
@@ -75,13 +75,12 @@ class DetailedCountryActivity : AppCompatActivity(), DetailedCountryMvp.View, On
     }
 
     private fun setMap(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null) {
-            mapView.onCreate(savedInstanceState)
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync {
+            googleMap = it
+            googleMap.uiSettings.setAllGesturesEnabled(false)
         }
-
-        mapView?.getMapAsync(this)
     }
-
 
     private fun init(country: String) {
         val applicationComponent = (application as MyApplication).applicationComponent
@@ -149,12 +148,7 @@ class DetailedCountryActivity : AppCompatActivity(), DetailedCountryMvp.View, On
 
     override fun showError() {
         Snackbar.make(findViewById(android.R.id.content), R.string.there_was_an_error, Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.retry) { view -> presenter.onRetryClicked(intent.getStringExtra(COUNTRY_NAME_TAG)) }
+                .setAction(R.string.retry) { presenter.onRetryClicked(intent.getStringExtra(COUNTRY_NAME_TAG)) }
                 .show()
-    }
-
-    override fun onMapReady(map: GoogleMap) {
-        googleMap = map
-        googleMap.uiSettings.setAllGesturesEnabled(false)
     }
 }

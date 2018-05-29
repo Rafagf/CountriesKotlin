@@ -283,7 +283,7 @@ class DetailedCountryPresenterTest {
             on { capital } doReturn "Madrid"
             on { continent } doReturn "Europe"
             on { region } doReturn "Southern Europe"
-            on { latLng } doReturn listOf(40.0, -4.0)
+            on { latlng } doReturn listOf(40.0, -4.0)
             on { demonym } doReturn "Spanish"
             on { area } doReturn "505992.0"
             on { population } doReturn "46439864"

@@ -18,7 +18,7 @@ import android.view.View
 import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.TestApplication
 import com.example.rafaelgarciafernandez.countrieskotlin.espresso.RecyclerViewItemCountAssertion
-import com.example.rafaelgarciafernandez.countrieskotlin.espresso.MatcherWithIndex
+import com.example.rafaelgarciafernandez.countrieskotlin.espresso.matcherWithIndex
 import com.example.rafaelgarciafernandez.countrieskotlin.getJsonFromAsset
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country
 import com.example.rafaelgarciafernandez.countrieskotlin.repositories.CountriesLocalDataSource
@@ -105,7 +105,7 @@ class CountryListActivityTest {
         onView(withId(R.id.action_search)).perform(click())
         onView(withId(R.id.searchTextView)).perform(typeText("Spain"))
         onView(withId(R.id.countriesRecyclerView)).check(RecyclerViewItemCountAssertion(1))
-        val countryName = onView(MatcherWithIndex(withId(R.id.nameTextView), 0))
+        val countryName = onView(matcherWithIndex(withId(R.id.nameTextView), 0))
         countryName.check(matches(withText("Spain")))
     }
 
@@ -118,9 +118,9 @@ class CountryListActivityTest {
         onView(withId(R.id.action_search)).perform(click())
         onView(withId(R.id.searchTextView)).perform(typeText("ge"))
         onView(withId(R.id.countriesRecyclerView)).check(RecyclerViewItemCountAssertion(2))
-        val firstCountryName = onView(MatcherWithIndex(withId(R.id.nameTextView), 0))
+        val firstCountryName = onView(matcherWithIndex(withId(R.id.nameTextView), 0))
         firstCountryName.check(matches(withText("Georgia")))
-        val secondCountryName = onView(MatcherWithIndex(withId(R.id.nameTextView), 1))
+        val secondCountryName = onView(matcherWithIndex(withId(R.id.nameTextView), 1))
         secondCountryName.check(matches(withText("Germany")))
     }
 
@@ -169,7 +169,7 @@ class CountryListActivityTest {
 
         onView(withId(R.id.countriesRecyclerView)).perform(scrollToPosition<RecyclerView.ViewHolder>(10))
         onView(withId(R.id.scrollToTop)).perform(click())
-        val firstCountryName = onView(MatcherWithIndex(withId(R.id.countryCardRoot), 0))
+        val firstCountryName = onView(matcherWithIndex(withId(R.id.countryCardRoot), 0))
         firstCountryName.check(matches(isDisplayed()))
     }
 

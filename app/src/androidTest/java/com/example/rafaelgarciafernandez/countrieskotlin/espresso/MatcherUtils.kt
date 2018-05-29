@@ -8,7 +8,7 @@ import org.hamcrest.TypeSafeMatcher
 /**
  * Created by Rafa on 07/05/2018.
  */
-fun MatcherWithIndex(matcher: Matcher<View>, index: Int): Matcher<View> {
+fun matcherWithIndex(matcher: Matcher<View>, index: Int): Matcher<View> {
     return object : TypeSafeMatcher<View>() {
         internal var currentIndex = 0
 
