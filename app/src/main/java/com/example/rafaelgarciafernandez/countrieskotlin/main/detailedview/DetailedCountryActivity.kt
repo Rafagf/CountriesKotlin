@@ -31,7 +31,7 @@ class DetailedCountryActivity : AppCompatActivity(), DetailedCountryMvp.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(R.anim.slide_in_up, R.anim.stay)
-        setContentView(R.layout.activity_detailed_country)
+        setContentView(R.layout.activity_detailed_country2)
         initViews(savedInstanceState)
         init(intent.getStringExtra(COUNTRY_NAME_TAG))
     }

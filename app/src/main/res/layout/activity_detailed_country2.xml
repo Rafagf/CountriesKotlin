@@ -20,6 +20,7 @@
         app:theme="@style/CountriesToolBar" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,51 +28,131 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/flagImageView"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:layout_marginBottom="16dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
-                tools:background="@color/plain_grey"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="16dp" />
+                tools:background="@color/plain_grey" />
+
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/capitalTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/continentTextView"
+                app:layout_constraintStart_toEndOf="@+id/flagImageView"
+                app:layout_constraintTop_toTopOf="@+id/flagImageView"
                 app:layout_constraintVertical_chainStyle="spread"
-                tools:layout_editor_absoluteX="222dp" />
+                tools:text="Madrid" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/continentTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                tools:layout_editor_absoluteX="222dp" />
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/regionTextView"
+                app:layout_constraintStart_toStartOf="@+id/capitalTextView"
+                app:layout_constraintTop_toBottomOf="@+id/capitalTextView"
+                tools:text="Europe" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/regionTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
-                tools:layout_editor_absoluteX="222dp" />
+                android:layout_marginBottom="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/flagImageView"
+                app:layout_constraintStart_toEndOf="@+id/flagImageView"
+                app:layout_constraintStart_toStartOf="@+id/continentTextView"
+                app:layout_constraintTop_toBottomOf="@+id/continentTextView"
+                tools:text="Southern Europe" />
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="28dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flagImageView"
+                tools:layout_editor_absoluteX="25dp" />
+
+            <TextView
+                android:id="@+id/populationTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/plain_black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mapView"
+                tools:text="Population: "/>
+
+
+            <TextView
+                android:id="@+id/areaTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/plain_black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/populationTextView"
+                tools:text="Area: " />
+
+            <TextView
+                android:id="@+id/demonymTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/plain_black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/areaTextView"
+                tools:text="Demonym: "/>
+
+            <TextView
+                android:id="@+id/nativeNameTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/plain_black"
+                tools:text="Native name:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/demonymTextView"
+                android:textSize="16sp" />
+
+            <com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview.bordersview.BordersView
+                android:id="@+id/bordersView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nativeNameTextView" />
 
         </android.support.constraint.ConstraintLayout>
+
+
     </ScrollView>
+
+
 
 </android.support.constraint.ConstraintLayout>
