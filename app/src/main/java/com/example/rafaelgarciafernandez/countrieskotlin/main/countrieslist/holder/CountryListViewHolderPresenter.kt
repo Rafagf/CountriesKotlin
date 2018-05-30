@@ -25,18 +25,17 @@ class CountryListViewHolderPresenter(private val view: CountryListViewHolderMvp.
 
     private fun setContinent(country: CountryListViewModel) {
         if (country.continent == null || country.continent.isEmpty()) {
-            view.setContinent(resourcesProvider.getText(R.string.continent) + "-")
+            view.setContinent("${resourcesProvider.getText(R.string.continent)}-")
         } else {
-            view.setContinent(resourcesProvider.getText(R.string.continent) + country.continent)
+            view.setContinent("${resourcesProvider.getText(R.string.continent)}${country.continent}")
         }
     }
 
     private fun setPopulation(country: CountryListViewModel) {
         if (country.population == null || country.population.isEmpty()) {
-            view.setPopulation(resourcesProvider.getText(R.string.population) + "-")
-        }
-        else {
-            view.setPopulation(resourcesProvider.getText(R.string.population) + country.population.toLong().toPopulationFormat())
+            view.setPopulation("${resourcesProvider.getText(R.string.population)}-")
+        } else {
+            view.setPopulation("${resourcesProvider.getText(R.string.population)}${country.population.toLong().toPopulationFormat()}")
         }
     }
 }

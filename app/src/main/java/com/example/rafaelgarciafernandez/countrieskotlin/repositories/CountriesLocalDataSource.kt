@@ -40,11 +40,8 @@ class CountriesLocalDataSource(private val sharedPreferences: SharedPreferences)
             val adapter: JsonAdapter<List<Country>> = Moshi.Builder().build().adapter(type)
             val countries: List<Country>? = adapter.fromJson(countriesInJson)
             if (countries != null) {
-                for (country in countries) {
-                    if (country.name == name) {
-                        return Maybe.just(country)
-                    }
-                }
+                val country = countries.find { it.name == name }
+                return Maybe.just(country)
             }
         }
 
@@ -58,11 +55,8 @@ class CountriesLocalDataSource(private val sharedPreferences: SharedPreferences)
             val adapter: JsonAdapter<List<Country>> = Moshi.Builder().build().adapter(type)
             val countries: List<Country>? = adapter.fromJson(countriesInJson)
             if (countries != null) {
-                for (country in countries) {
-                    if (country.alpha3Code == alpha) {
-                        return Maybe.just(country)
-                    }
-                }
+                val country = countries.find { it.alpha3Code == alpha }
+                return Maybe.just(country)
             }
         }
 

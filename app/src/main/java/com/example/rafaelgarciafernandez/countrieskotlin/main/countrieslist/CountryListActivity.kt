@@ -8,15 +8,15 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.View
-import android.widget.Toast
 import com.example.rafaelgarciafernandez.countrieskotlin.MyApplication
 import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.di.components.DaggerCountryListViewComponent
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.CountryListViewModule
+import com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview.DetailedCountryActivity
 import com.example.rafaelgarciafernandez.countrieskotlin.utils.setStatusBarColor
-import com.example.rafaelgarciafernandez.countrieskotlin.utils.toast
 import com.miguelcatalan.materialsearchview.MaterialSearchView
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
 class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
@@ -141,6 +141,6 @@ class CountryListActivity : AppCompatActivity(), CountryListMvp.View {
     }
 
     override fun goToCountryDetailedView(country: CountryListViewModel) {
-        //todo take to detailed view
+        startActivity<DetailedCountryActivity>(DetailedCountryActivity.COUNTRY_NAME_TAG to country.name)
     }
 }

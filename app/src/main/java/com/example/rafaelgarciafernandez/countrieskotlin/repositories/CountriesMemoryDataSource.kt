@@ -20,7 +20,7 @@ class CountriesMemoryDataSource {
 
     fun getCountries(): Maybe<List<Country>> {
         return if (countries.size > 0) {
-            val shallowCopy = ArrayList<Country>(countries)
+            val shallowCopy: List<Country> = ArrayList<Country>(countries)
             Maybe.just(shallowCopy)
         } else {
             Maybe.empty()
@@ -28,22 +28,20 @@ class CountriesMemoryDataSource {
     }
 
     fun getCountryByName(name: String): Maybe<Country> {
-        for (country in countries) {
-            if (country.name == name) {
-                return Maybe.just(country)
-            }
+        val country: Country? = countries.find { it.name == name }
+        return if (country != null) {
+            Maybe.just(country)
+        } else {
+            Maybe.empty()
         }
-
-        return Maybe.empty()
     }
 
     fun getCountryByAlpha3(alpha: String): Maybe<Country> {
-        for (country in countries) {
-            if (country.alpha3Code == alpha) {
-                return Maybe.just(country)
-            }
+        val country: Country? = countries.find { it.alpha3Code == alpha }
+        return if (country != null) {
+            Maybe.just(country)
+        } else {
+            Maybe.empty()
         }
-
-        return Maybe.empty()
     }
 }

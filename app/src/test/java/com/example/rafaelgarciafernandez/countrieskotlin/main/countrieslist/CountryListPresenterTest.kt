@@ -8,7 +8,6 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import io.reactivex.Single
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers
@@ -22,16 +21,9 @@ class CountryListPresenterTest {
     @get:Rule
     val schedulers = RxImmediateSchedulerRule()
 
-    private lateinit var view: CountryListMvp.View
-    private lateinit var interactor: CountryListMvp.Interactor
-    private lateinit var presenter: CountryListPresenter
-
-    @Before
-    fun setUp() {
-        view = mock()
-        interactor = mock()
-        presenter = CountryListPresenter(view, interactor)
-    }
+    private val view: CountryListMvp.View = mock()
+    private val interactor: CountryListMvp.Interactor = mock()
+    private val presenter: CountryListPresenter = CountryListPresenter(view, interactor)
 
     @Test
     fun when_it_starts_then_it_get_countries() {
