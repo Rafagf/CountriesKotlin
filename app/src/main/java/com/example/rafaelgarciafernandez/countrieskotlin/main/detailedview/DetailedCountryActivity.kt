@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.example.rafaelgarciafernandez.countrieskotlin.MyApplication
 import com.example.rafaelgarciafernandez.countrieskotlin.R
-import com.example.rafaelgarciafernandez.countrieskotlin.R.id.*
 import com.example.rafaelgarciafernandez.countrieskotlin.di.components.DaggerDetailedCountryViewComponent
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.DetailedCountryViewModule
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -31,7 +30,7 @@ class DetailedCountryActivity : AppCompatActivity(), DetailedCountryMvp.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(R.anim.slide_in_up, R.anim.stay)
-        setContentView(R.layout.activity_detailed_country2)
+        setContentView(R.layout.activity_detailed_country)
         initViews(savedInstanceState)
         init(intent.getStringExtra(COUNTRY_NAME_TAG))
     }
@@ -72,6 +71,11 @@ class DetailedCountryActivity : AppCompatActivity(), DetailedCountryMvp.View {
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun setMap(savedInstanceState: Bundle?) {
