@@ -105,8 +105,8 @@ class DetailedCountryPresenter(private val view: DetailedCountryMvp.View, privat
     private fun setPopulation() {
         val population: String? = countryViewModel.population
         when {
-            population != null && population.isNotEmpty() -> view.setPopulation(resourcesProvider.getText(R.string.population) + population.toLong().toPopulationFormat())
-            else -> view.setPopulation(resourcesProvider.getText(R.string.population) + "0")
+            population != null && population.isNotEmpty() -> view.setPopulation("${resourcesProvider.getText(R.string.population)}${population.toLong().toPopulationFormat()}")
+            else -> view.setPopulation("${resourcesProvider.getText(R.string.population)}0")
 
         }
     }
@@ -114,8 +114,8 @@ class DetailedCountryPresenter(private val view: DetailedCountryMvp.View, privat
     private fun setArea() {
         val area: String? = countryViewModel.area
         when {
-            area != null && area.isNotEmpty() -> view.setArea(resourcesProvider.getText(R.string.area) + area.toFloat().toAreaFormat())
-            else -> view.setArea(resourcesProvider.getText(R.string.area) + "0 m²")
+            area != null && area.isNotEmpty() -> view.setArea("${resourcesProvider.getText(R.string.area)}${area.toFloat().toAreaFormat()}")
+            else -> view.setArea("${resourcesProvider.getText(R.string.area)}0 m²")
 
         }
     }
@@ -123,8 +123,8 @@ class DetailedCountryPresenter(private val view: DetailedCountryMvp.View, privat
     private fun setDemonym() {
         val demonym: String? = countryViewModel.demonym
         when {
-            demonym != null && demonym.isNotEmpty() -> view.setDemonym(resourcesProvider.getText(R.string.demonym) + demonym)
-            else -> view.setDemonym(resourcesProvider.getText(R.string.demonym) + "-")
+            demonym != null && demonym.isNotEmpty() -> view.setDemonym("${resourcesProvider.getText(R.string.demonym)}$demonym")
+            else -> view.setDemonym("${resourcesProvider.getText(R.string.demonym)}-")
 
         }
     }
@@ -132,8 +132,8 @@ class DetailedCountryPresenter(private val view: DetailedCountryMvp.View, privat
     private fun setNativeName() {
         val nativeName: String? = countryViewModel.nativeName
         when {
-            nativeName != null && nativeName.isNotEmpty() -> view.setNativeName(resourcesProvider.getText(R.string.native_name) + nativeName)
-            else -> view.setNativeName(resourcesProvider.getText(R.string.native_name) + "-")
+            nativeName != null && nativeName.isNotEmpty() -> view.setNativeName("${resourcesProvider.getText(R.string.native_name)}$nativeName")
+            else -> view.setNativeName("${resourcesProvider.getText(R.string.native_name)}-")
         }
     }
 
