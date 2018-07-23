@@ -35,14 +35,14 @@ import java.lang.reflect.Type
 class DetailedCountryActivityTest {
 
     @get:Rule
-    var mActivityTestRule = IntentsTestRule(DetailedCountryActivity::class.java, false, false)
+    var activityTestRule = IntentsTestRule(DetailedCountryActivity::class.java, false, false)
 
     @Before
     fun setUp() {
         RESTMockServer.reset()
-        val countriesProvider = (InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as TestApplication).applicationComponent.countriesProvider
+        val countriesRepository = (InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as TestApplication).applicationComponent.countriesRepository
         val countries = getCountriesFromJson("json/all_countries.json")
-        countriesProvider.memoryDataSource.save(countries)
+        countriesRepository.memoryDataSource.save(countries)
     }
 
     @Test
@@ -50,7 +50,7 @@ class DetailedCountryActivityTest {
         val intent = Intent()
         intent.putExtra(DetailedCountryActivity.COUNTRY_NAME_TAG, "Spain")
 
-        mActivityTestRule.launchActivity(intent)
+        activityTestRule.launchActivity(intent)
 
         onView(withId(R.id.detailedViewRoot)).check(matches(isDisplayed()))
     }
@@ -60,16 +60,12 @@ class DetailedCountryActivityTest {
         val intent = Intent()
         intent.putExtra(DetailedCountryActivity.COUNTRY_NAME_TAG, "Spain")
 
-        mActivityTestRule.launchActivity(intent)
+        activityTestRule.launchActivity(intent)
 
         onView(allOf<View>(instanceOf<Any>(TextView::class.java), withParent(withId(R.id.toolbar)))).check(matches(withText("Spain")))
         onView(withId(R.id.capitalTextView)).check(matches(withText("Madrid")))
         onView(withId(R.id.continentTextView)).check(matches(withText("Europe")))
         onView(withId(R.id.regionTextView)).check(matches(withText("Southern Europe")))
-        onView(withId(R.id.populationTextView)).check(matches(withText("Population: 46.4M")))
-        onView(withId(R.id.areaTextView)).check(matches(withText("Area: 505.9 km²")))
-        onView(withId(R.id.demonymTextView)).check(matches(withText("Demonym: Spanish")))
-        onView(withId(R.id.nativeNameTextView)).check(matches(withText("Native name: España")))
     }
 
     @Test
@@ -77,7 +73,7 @@ class DetailedCountryActivityTest {
         val intent = Intent()
         intent.putExtra(DetailedCountryActivity.COUNTRY_NAME_TAG, "Martinique")
 
-        mActivityTestRule.launchActivity(intent)
+        activityTestRule.launchActivity(intent)
 
         onView(withId(R.id.bordersLinearLayout)).check(matches(hasChildCount(0)))
     }
@@ -87,7 +83,7 @@ class DetailedCountryActivityTest {
         val intent = Intent()
         intent.putExtra(DetailedCountryActivity.COUNTRY_NAME_TAG, "Spain")
 
-        mActivityTestRule.launchActivity(intent)
+        activityTestRule.launchActivity(intent)
 
         onView(withId(R.id.bordersLinearLayout)).check(matches(hasChildCount(5)))
         val borderCountryName1 = onView(matcherWithIndex(withId(R.id.borderTextView), 0))
@@ -107,7 +103,7 @@ class DetailedCountryActivityTest {
         val intent = Intent()
         intent.putExtra(DetailedCountryActivity.COUNTRY_NAME_TAG, "Spain")
 
-        mActivityTestRule.launchActivity(intent)
+        activityTestRule.launchActivity(intent)
 
         onView(allOf<View>(instanceOf<Any>(TextView::class.java), withParent(withId(R.id.toolbar)))).check(matches(withText("Spain")))
         val borderCountryName1 = onView(matcherWithIndex(withId(R.id.borderTextView), 0))

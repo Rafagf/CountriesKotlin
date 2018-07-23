@@ -1,4 +1,4 @@
-package com.example.rafaelgarciafernandez.countrieskotlin.repositories
+package com.example.rafaelgarciafernandez.countrieskotlin.repositories.countries
 
 import com.example.rafaelgarciafernandez.countrieskotlin.api.request.country.CountryApi
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country

@@ -15,19 +15,21 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.TextView
 import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.TestApplication
 import com.example.rafaelgarciafernandez.countrieskotlin.espresso.RecyclerViewItemCountAssertion
 import com.example.rafaelgarciafernandez.countrieskotlin.espresso.matcherWithIndex
 import com.example.rafaelgarciafernandez.countrieskotlin.getJsonFromAsset
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country
-import com.example.rafaelgarciafernandez.countrieskotlin.repositories.CountriesLocalDataSource
-import com.example.rafaelgarciafernandez.countrieskotlin.repositories.CountriesMemoryDataSource
+import com.example.rafaelgarciafernandez.countrieskotlin.repositories.countries.CountriesLocalDataSource
+import com.example.rafaelgarciafernandez.countrieskotlin.repositories.countries.CountriesMemoryDataSource
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import io.appflate.restmock.RESTMockServer
 import io.appflate.restmock.utils.RequestMatchers
+import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.not
 import org.junit.Before
 import org.junit.Rule
@@ -51,9 +53,9 @@ class CountryListActivityTest {
     @Before
     fun setUp() {
         RESTMockServer.reset()
-        val countriesProvider = (InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as TestApplication).applicationComponent.countriesProvider
-        countriesLocalDataSource = countriesProvider.localDataSource
-        countriesMemoryDataSource = countriesProvider.memoryDataSource
+        val countriesRepository = (InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as TestApplication).applicationComponent.countriesRepository
+        countriesLocalDataSource = countriesRepository.localDataSource
+        countriesMemoryDataSource = countriesRepository.memoryDataSource
         countriesLocalDataSource.clear()
         countriesMemoryDataSource.clear()
     }
@@ -175,12 +177,26 @@ class CountryListActivityTest {
 
     @Test
     fun when_search_item_is_clicked_then_go_to_detailed_view() {
-       //todo when detailed view is implemented
+        RESTMockServer.whenGET(RequestMatchers.pathEndsWith("all")).thenReturnFile(200, "json/all_countries.json")
+
+        activityTestRule.launchActivity(Intent())
+
+        onView(withId(R.id.action_search)).perform(click())
+        onView(withId(R.id.searchTextView)).perform(typeText("Spain"))
+        onView(matcherWithIndex(withId(R.id.nameTextView), 0)).perform(click())
+        onView(CoreMatchers.allOf<View>(CoreMatchers.instanceOf<Any>(TextView::class.java), withParent(withId(R.id.toolbar)))).check(matches(withText("Spain")))
+
     }
 
     @Test
     fun when_country_is_clicked_then_go_to_detailed_view() {
-       //todo when detailed view is implemented
+        val countries = getCountriesFromJson("json/list_of_countries_2.json")
+        countriesLocalDataSource.save(countries)
+
+        activityTestRule.launchActivity(Intent())
+
+        onView(matcherWithIndex(withId(R.id.nameTextView), 0)).perform(click())
+        onView(CoreMatchers.allOf<View>(CoreMatchers.instanceOf<Any>(TextView::class.java), withParent(withId(R.id.toolbar)))).check(matches(withText("Afghanistan")))
     }
 
     @Throws(IOException::class)

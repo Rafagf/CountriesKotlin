@@ -1,4 +1,4 @@
-package com.example.rafaelgarciafernandez.countrieskotlin.repositories
+package com.example.rafaelgarciafernandez.countrieskotlin.repositories.countries
 
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country
 import io.reactivex.Maybe

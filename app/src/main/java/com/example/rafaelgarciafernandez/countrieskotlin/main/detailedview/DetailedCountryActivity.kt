@@ -99,6 +99,7 @@ class DetailedCountryActivity : AppCompatActivity(), DetailedCountryMvp.View {
     override fun setFlag(url: String) {
         Picasso.with(this)
                 .load(url)
+                .placeholder(R.color.cardview_shadow_start_color)
                 .into(flagImageView)
     }
 
