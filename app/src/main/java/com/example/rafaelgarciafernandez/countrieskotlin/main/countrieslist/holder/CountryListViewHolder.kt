@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.rafaelgarciafernandez.countrieskotlin.MyApplication
+import com.example.rafaelgarciafernandez.countrieskotlin.R
 import com.example.rafaelgarciafernandez.countrieskotlin.di.components.DaggerCountryListViewHolderComponent
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.CountryListViewHolderModule
 import com.example.rafaelgarciafernandez.countrieskotlin.main.countrieslist.CountryListViewModel
@@ -53,6 +54,7 @@ class CountryListViewHolder(val view: View) : RecyclerView.ViewHolder(view), Cou
     override fun setFlag(url: String) {
         Picasso.with(itemView.context)
                 .load(url)
+                .placeholder(R.color.cardview_shadow_start_color)
                 .into(flagImageView)
     }
 }

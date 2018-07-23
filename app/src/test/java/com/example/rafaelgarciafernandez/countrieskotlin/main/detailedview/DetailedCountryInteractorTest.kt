@@ -1,15 +1,12 @@
 package com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview
 
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country
-import com.example.rafaelgarciafernandez.countrieskotlin.repositories.CountriesLocalDataSource
-import com.example.rafaelgarciafernandez.countrieskotlin.repositories.CountriesMemoryDataSource
-import com.example.rafaelgarciafernandez.countrieskotlin.repositories.CountriesRemoteDataSource
+import com.example.rafaelgarciafernandez.countrieskotlin.repositories.countries.CountriesRepository
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
-import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
-import junit.framework.Assert.assertEquals
+import junit.framework.TestCase
 import org.junit.Test
 import org.mockito.Mockito.`when`
 
@@ -18,110 +15,29 @@ import org.mockito.Mockito.`when`
  */
 class DetailedCountryInteractorTest {
 
-    private val memoryDataSource: CountriesMemoryDataSource = mock()
-    private val localDataSource: CountriesLocalDataSource = mock()
-    private val remoteDataSource: CountriesRemoteDataSource = mock()
-    private val interactor: DetailedCountryInteractor = DetailedCountryInteractor(localDataSource, memoryDataSource, remoteDataSource)
-    private val country = mock<Country> {
-        on { name } doReturn "Spain"
-    }
+    private val countriesRepository: CountriesRepository = mock()
+    private val interactor: DetailedCountryInteractor = DetailedCountryInteractor(countriesRepository)
 
     @Test
-    fun given_memory_data_source_has_data_when_getting_country_then_return_memory_data_source_content() {
-        val observer = TestObserver<Country>()
-        `when`(memoryDataSource.getCountryByName("Spain")).thenReturn(Maybe.just(country))
-        `when`(localDataSource.getCountryByName("Spain")).thenReturn(Maybe.empty())
-        `when`(remoteDataSource.getCountryByName("Spain")).thenReturn(Single.never())
+    fun given_list_of_alpha3_countries_when_getting_countries_names_then_return_names() {
+        val alphaList = listOf("ESP", "POR")
+        val spain = mock<Country> {
+            on { name } doReturn "Spain"
+            on { alpha3Code } doReturn "ESP"
+        }
+        val portugal = mock<Country> {
+            on { name } doReturn "Portugal"
+            on { alpha3Code } doReturn "POR"
+        }
+        `when`(countriesRepository.getCountryByAlpha3("ESP")).thenReturn(Single.just(spain))
+        `when`(countriesRepository.getCountryByAlpha3("POR")).thenReturn(Single.just(portugal))
+        val testObserver = TestObserver<List<String>>()
 
-        val observable = interactor.getCountry("Spain")
-
-        observable.subscribe(observer)
-        observer.assertComplete()
-        observer.assertNoErrors()
-        val receivedCountry = observer.values()[0]
-        assertEquals(receivedCountry.name, "Spain")
-    }
-
-    @Test
-    fun given_local_data_source_has_data_when_getting_country_then_return_local_data_source_content() {
-        val observer = TestObserver<Country>()
-        `when`(memoryDataSource.getCountryByName("Spain")).thenReturn(Maybe.empty())
-        `when`(localDataSource.getCountryByName("Spain")).thenReturn(Maybe.just(country))
-        `when`(remoteDataSource.getCountryByName("Spain")).thenReturn(Single.never())
-
-        val observable = interactor.getCountry("Spain")
-
-        observable.subscribe(observer)
-        observer.assertComplete()
-        observer.assertNoErrors()
-        val receivedCountry = observer.values()[0]
-        assertEquals(receivedCountry.name, "Spain")
-    }
-
-    @Test
-    fun given_remote_data_source_has_data_when_getting_country_then_return_remote_data_source_content() {
-        val observer = TestObserver<Country>()
-        `when`(memoryDataSource.getCountryByName("Spain")).thenReturn(Maybe.empty())
-        `when`(localDataSource.getCountryByName("Spain")).thenReturn(Maybe.empty())
-        `when`(remoteDataSource.getCountryByName("Spain")).thenReturn(Single.just(country))
-
-        val observable = interactor.getCountry("Spain")
-
-        observable.subscribe(observer)
-        observer.assertComplete()
-        observer.assertNoErrors()
-        val receivedCountry = observer.values()[0]
-        assertEquals(receivedCountry.name, "Spain")
-    }
-
-    @Test
-    fun given_memory_data_source_has_data_when_getting_border_countries_then_return_memory_data_source_content() {
-        val observer = TestObserver<List<String>>()
-        `when`(memoryDataSource.getCountryByAlpha3("ESP")).thenReturn(Maybe.just(country))
-        `when`(localDataSource.getCountryByAlpha3("ESP")).thenReturn(Maybe.empty())
-        `when`(remoteDataSource.getCountryByAlpha3("ESP")).thenReturn(Single.never())
-        val borderCountryList = listOf("ESP")
-
-        val observable = interactor.getBorderCountriesName(borderCountryList)
-
-        observable.subscribe(observer)
-        observer.assertComplete()
-        observer.assertNoErrors()
-        val receivedCountryList = observer.values()[0]
-        assertEquals(receivedCountryList[0], "Spain")
-    }
-
-    @Test
-    fun given_local_data_source_has_data_when_getting_border_countries_then_return_local_data_source_content() {
-        val observer = TestObserver<List<String>>()
-        `when`(memoryDataSource.getCountryByAlpha3("ESP")).thenReturn(Maybe.empty())
-        `when`(localDataSource.getCountryByAlpha3("ESP")).thenReturn(Maybe.just(country))
-        `when`(remoteDataSource.getCountryByAlpha3("ESP")).thenReturn(Single.never())
-        val borderCountryList = listOf("ESP")
-
-        val observable = interactor.getBorderCountriesName(borderCountryList)
-
-        observable.subscribe(observer)
-        observer.assertComplete()
-        observer.assertNoErrors()
-        val receivedCountryList = observer.values()[0]
-        assertEquals(receivedCountryList[0], "Spain")
-    }
-
-    @Test
-    fun given_remote_data_source_has_data_when_getting_border_countries_then_return_remote_data_source_content() {
-        val observer = TestObserver<List<String>>()
-        `when`(memoryDataSource.getCountryByAlpha3("ESP")).thenReturn(Maybe.empty())
-        `when`(localDataSource.getCountryByAlpha3("ESP")).thenReturn(Maybe.empty())
-        `when`(remoteDataSource.getCountryByAlpha3("ESP")).thenReturn(Single.just(country))
-        val borderCountryList = listOf("ESP")
-
-        val observable = interactor.getBorderCountriesName(borderCountryList)
-
-        observable.subscribe(observer)
-        observer.assertComplete()
-        observer.assertNoErrors()
-        val receivedCountryList = observer.values()[0]
-        assertEquals(receivedCountryList[0], "Spain")
+        val observable = interactor.getBorderCountriesName(alphaList)
+        observable.subscribe(testObserver)
+        testObserver.assertComplete()
+        testObserver.assertNoErrors()
+        TestCase.assertEquals(testObserver.values()[0][0], "Spain")
+        TestCase.assertEquals(testObserver.values()[0][1], "Portugal")
     }
 }

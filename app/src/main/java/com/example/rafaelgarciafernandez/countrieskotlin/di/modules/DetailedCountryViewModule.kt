@@ -1,11 +1,11 @@
 package com.example.rafaelgarciafernandez.countrieskotlin.di.modules
 
-import com.example.rafaelgarciafernandez.countrieskotlin.di.providers.CountriesProvider
 import com.example.rafaelgarciafernandez.countrieskotlin.di.providers.FlagProvider
 import com.example.rafaelgarciafernandez.countrieskotlin.di.providers.ResourcesProvider
 import com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview.DetailedCountryInteractor
 import com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview.DetailedCountryMvp
 import com.example.rafaelgarciafernandez.countrieskotlin.main.detailedview.DetailedCountryPresenter
+import com.example.rafaelgarciafernandez.countrieskotlin.repositories.countries.CountriesRepository
 import dagger.Module
 import dagger.Provides
 
@@ -16,8 +16,8 @@ import dagger.Provides
 class DetailedCountryViewModule(private val view: DetailedCountryMvp.View) {
 
     @Provides
-    fun provideInteractor(countriesProvider: CountriesProvider): DetailedCountryMvp.Interactor {
-        return DetailedCountryInteractor(countriesProvider.localDataSource, countriesProvider.memoryDataSource, countriesProvider.remoteDataSource)
+    fun provideInteractor(countriesRepository: CountriesRepository): DetailedCountryMvp.Interactor {
+        return DetailedCountryInteractor(countriesRepository)
     }
 
     @Provides

@@ -1,4 +1,4 @@
-package com.example.rafaelgarciafernandez.countrieskotlin.repositories
+package com.example.rafaelgarciafernandez.countrieskotlin.repositories.countries
 
 import android.content.SharedPreferences
 import com.example.rafaelgarciafernandez.countrieskotlin.model.Country

@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.rafaelgarciafernandez.countrieskotlin.api.request.country.CountryApi
 import com.example.rafaelgarciafernandez.countrieskotlin.di.modules.*
-import com.example.rafaelgarciafernandez.countrieskotlin.di.providers.CountriesProvider
 import com.example.rafaelgarciafernandez.countrieskotlin.di.providers.FlagProvider
 import com.example.rafaelgarciafernandez.countrieskotlin.di.providers.ResourcesProvider
+import com.example.rafaelgarciafernandez.countrieskotlin.repositories.countries.CountriesRepository
 import dagger.Component
 import javax.inject.Singleton
 
@@ -23,7 +23,7 @@ interface ApplicationComponent {
 
     val countryApi: CountryApi
 
-    val countriesProvider: CountriesProvider
+    val countriesRepository: CountriesRepository
 
     val FlagProvider: FlagProvider
 
