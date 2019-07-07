@@ -19,7 +19,7 @@ https://play.google.com/store/apps/details?id=com.countries.countriesoftheworld
 
 ## Author
 
-Rafael García Fernández
+Rafael Garcia Fernandez
 
 * GitHub: http://github.com/rafagf
 * Email: rafagarfer@gmail.com
